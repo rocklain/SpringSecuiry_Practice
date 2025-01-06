@@ -4,10 +4,12 @@ import com.example.its.domain.issue.auth.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Collections;
 
 @Controller
 @RequestMapping("/users")
@@ -24,7 +26,16 @@ public class UserController {
 
     //GET /users/creationForm
     @GetMapping("/creationForm")
-    public String showCreationForm() {
+    public String showCreationForm(@ModelAttribute UserForm form) {
         return "users/creationForm";
+    }
+
+    //POST /users
+    @PostMapping
+    public String create(@Validated UserForm form, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return showCreationForm(form);
+        }
+        return "redirect:/users";
     }
 }

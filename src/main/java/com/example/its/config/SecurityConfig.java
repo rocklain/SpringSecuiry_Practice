@@ -8,21 +8,22 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //for h2-console デプロイ時は無効化する
-//        http.authorizeRequests().antMatchers("/h2-console/**").permitAll()
-//                        .and()
-//                        .csrf().ignoringAntMatchers("/h2-console/**")
-//                        .and()
-//                                .headers().frameOptions().disable();
+        http.authorizeRequests().antMatchers("/h2-console/**").permitAll()
+                        .and()
+                        .csrf().ignoringAntMatchers("/h2-console/**")
+                        .and()
+                                .headers().frameOptions().disable();
 
         http
                 .authorizeRequests()
@@ -36,6 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-        .passwordEncoder(NoOpPasswordEncoder.getInstance());
+        .passwordEncoder(passwordEncoder);
     }
 }

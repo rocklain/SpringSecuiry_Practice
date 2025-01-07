@@ -9,4 +9,10 @@ public class User {
 
     private String username;
     private String password;
+    private Authority authority;
+
+    private enum Authority {
+        ADMIN,
+        USER,
+    }
 }

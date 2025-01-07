@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                         user -> new CustomUserDetails(
                                 user.getUsername(),
                                 user.getPassword(),
-                                Collections.emptyList()
+                                toGrantedAuthorityList(user.getAuthotiry())
                         )
                 )
                 .orElseThrow(
@@ -30,5 +30,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                                 "Given username is not found.(username= ' " + username + " ')"
                         )
                 );
+
     }
 }

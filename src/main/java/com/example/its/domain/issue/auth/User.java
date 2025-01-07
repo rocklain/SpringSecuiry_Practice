@@ -11,7 +11,7 @@ public class User {
     private String password;
     private Authority authority;
 
-    private enum Authority {
+    public enum Authority {
         ADMIN,
         USER,
     }

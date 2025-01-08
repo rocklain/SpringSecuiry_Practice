@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: layout(~{::title}, ~{::body})}">
 <head>
-    <title>ユーザー作成 | 課題管理アプリケーション</title>
+  <title>ユーザー作成 | 課題管理アプリケーション</title>
 </head>
 <body>
 <h1 class="mt-3">ユーザー作成</h1>
@@ -15,7 +15,7 @@
     <input type="text" id="usernameInput" class="form-control" th:field="*{username}"
            th:classappend="${#fields.hasErrors('username')} ? is-invalid">
     <p class="invalid-feedback" th:if="${#fields.hasErrors('username')} ? is-invalid"
-     th:errors="*{username}">(errors)</p>
+       th:errors="*{username}">(errors)</p>
   </div>
 
   <!--　パスワード -->
@@ -27,11 +27,30 @@
        th:errors="*{password}">(errors)</p>
   </div>
 
+  <div>
+    <label class="form-label" for="authorityRadio">権限</label>
+    <div id="authorityRadio">
+      <div class="form-check">
+        <input class="form-check-input" type="radio"
+               id="authorityAdminRadio" name="authority" value="ADMIN">
+        <label class="for-check-label" for="authorityAdminRadio">ADMIN</label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio"
+               id="authorityUserRadio" name="authority" value="USER">
+        <label class="for-check-label" for="authorityUserRadio">USER</label>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ボタン（作成、キャンセル）　 -->
   <div class="mt-3">
     <button type="submit" class="btn btn-primary">作成</button>
     <a href="./list.html" th:href="@{/users}" class="btn btn-secondary">キャンセル</a>
   </div>
+
 </form>
 </body>
 </html>

@@ -32,13 +32,13 @@
     <div id="authorityRadio">
       <div class="form-check">
         <input class="form-check-input" type="radio"
-               id="authorityAdminRadio" name="authority" value="ADMIN">
+               id="authorityAdminRadio" th:field="*{authority}" value="ADMIN">
         <label class="for-check-label" for="authorityAdminRadio">ADMIN</label>
       </div>
 
       <div class="form-check">
         <input class="form-check-input" type="radio"
-               id="authorityUserRadio" name="authority" value="USER">
+               id="authorityUserRadio" th:field="*{authority}"  value="USER">
         <label class="for-check-label" for="authorityUserRadio">USER</label>
       </div>
 

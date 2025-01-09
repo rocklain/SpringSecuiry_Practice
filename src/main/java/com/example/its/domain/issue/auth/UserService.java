@@ -18,8 +18,8 @@ public class UserService {
     public List<User> findAll() {return userRepository.findAll();}
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void create(String username, String password) {
+    public void create(String username, String password, String authority) {
         var encodedPassword = passwordEncoder.encode(password);
-        userRepository.insert(username, encodedPassword);
+        userRepository.insert(username, encodedPassword,authority);
     }
 }
